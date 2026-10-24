@@ -113,6 +113,26 @@ def buscar_por_codigo():
         print("  Estado:        " + estados_tramite[posicion])
 
 
+def intercambiar_registros(idx1, idx2):
+    codigos_exp[idx1], codigos_exp[idx2] = codigos_exp[idx2], codigos_exp[idx1]
+    dnis_solicitante[idx1], dnis_solicitante[idx2] = dnis_solicitante[idx2], dnis_solicitante[idx1]
+    zonas_quebrada[idx1], zonas_quebrada[idx2] = zonas_quebrada[idx2], zonas_quebrada[idx1]
+    tipos_recurso[idx1], tipos_recurso[idx2] = tipos_recurso[idx2], tipos_recurso[idx1]
+    cant_damnificados[idx1], cant_damnificados[idx2] = cant_damnificados[idx2], cant_damnificados[idx1]
+    niveles_urgencia[idx1], niveles_urgencia[idx2] = niveles_urgencia[idx2], niveles_urgencia[idx1]
+    puntajes_prioridad[idx1], puntajes_prioridad[idx2] = puntajes_prioridad[idx2], puntajes_prioridad[idx1]
+    estados_tramite[idx1], estados_tramite[idx2] = estados_tramite[idx2], estados_tramite[idx1]
+
+
+def ordenar_por_prioridad():
+    n = len(codigos_exp)
+    for pasada in range(n - 1):
+        for j in range(n - 1 - pasada):
+            if puntajes_prioridad[j] < puntajes_prioridad[j + 1]:
+                intercambiar_registros(j, j + 1)
+    print("Expedientes ordenados por prioridad (mayor a menor).")
+
+
 cargar_datos_iniciales()
+ordenar_por_prioridad()
 mostrar_expedientes()
-buscar_por_codigo()
