@@ -133,6 +133,47 @@ def ordenar_por_prioridad():
     print("Expedientes ordenados por prioridad (mayor a menor).")
 
 
+def ordenar_por_codigo():
+    n = len(codigos_exp)
+    for i in range(n - 1):
+        menor = i
+        for j in range(i + 1, n):
+            if codigos_exp[j] < codigos_exp[menor]:
+                menor = j
+        if menor != i:
+            intercambiar_registros(i, menor)
+    print("Expedientes ordenados por codigo (orden de llegada).")
+
+
+def ejecutar_menu():
+    while True:
+        print("\n===== MESA DE PARTES DIGITAL - RECURSOS (CHOSICA) =====")
+        print("1. Registrar solicitud")
+        print("2. Mostrar expedientes")
+        print("3. Buscar por codigo")
+        print("4. Ordenar por prioridad")
+        print("5. Ordenar por codigo")
+        print("6. Salir")
+        opcion = input("Opcion: ").strip()
+
+        if opcion == "1":
+            registrar_solicitud()
+        elif opcion == "2":
+            mostrar_expedientes()
+        elif opcion == "3":
+            buscar_por_codigo()
+        elif opcion == "4":
+            ordenar_por_prioridad()
+            mostrar_expedientes()
+        elif opcion == "5":
+            ordenar_por_codigo()
+            mostrar_expedientes()
+        elif opcion == "6":
+            print("Hasta luego.")
+            break
+        else:
+            print("Opcion no valida, elige del 1 al 6.")
+
+
 cargar_datos_iniciales()
-ordenar_por_prioridad()
-mostrar_expedientes()
+ejecutar_menu()
