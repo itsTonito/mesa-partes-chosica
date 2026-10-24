@@ -79,5 +79,40 @@ def registrar_solicitud():
           + " (puntaje " + str(puntajes_prioridad[ultimo]) + ")")
 
 
+def mostrar_expedientes():
+    print("\n" + "-" * 94)
+    print(f"{'CODIGO':<14}{'DNI':<10}{'QUEBRADA':<19}{'RECURSO':<25}{'DAMN.':>6}{'URG.':>6}{'PUNT.':>7}  ESTADO")
+    print("-" * 94)
+    if len(codigos_exp) == 0:
+        print("No hay expedientes registrados.")
+    for i in range(len(codigos_exp)):
+        print(f"{codigos_exp[i]:<14}{dnis_solicitante[i]:<10}{zonas_quebrada[i]:<19}"
+              f"{tipos_recurso[i]:<25}{cant_damnificados[i]:>6}{niveles_urgencia[i]:>6}"
+              f"{puntajes_prioridad[i]:>7}  {estados_tramite[i]}")
+    print("-" * 94)
+
+
+def buscar_por_codigo():
+    print("\n--- Buscar expediente ---")
+    buscado = input("Codigo (ej. EXP-2026-001): ").strip().upper()
+    posicion = -1
+    for i in range(len(codigos_exp)):
+        if codigos_exp[i] == buscado:
+            posicion = i
+    if posicion == -1:
+        print("No se encontro el expediente " + buscado)
+    else:
+        print("Expediente encontrado:")
+        print("  Codigo:        " + codigos_exp[posicion])
+        print("  DNI:           " + dnis_solicitante[posicion])
+        print("  Quebrada:      " + zonas_quebrada[posicion])
+        print("  Recurso:       " + tipos_recurso[posicion])
+        print("  Damnificados:  " + str(cant_damnificados[posicion]))
+        print("  Urgencia:      " + str(niveles_urgencia[posicion]))
+        print("  Puntaje:       " + str(puntajes_prioridad[posicion]))
+        print("  Estado:        " + estados_tramite[posicion])
+
+
 cargar_datos_iniciales()
-registrar_solicitud()
+mostrar_expedientes()
+buscar_por_codigo()
